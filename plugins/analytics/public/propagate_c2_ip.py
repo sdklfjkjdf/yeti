@@ -7,17 +7,17 @@ from mongoengine import Q
 import logging
 
 
-class PropagatePhishingIp(ScheduledAnalytics):
+class PropagateC2Ip(ScheduledAnalytics):
 
     default_values = {
         "frequency": timedelta(hours=1),
-        "name": "PropagatePhishingIp",
+        "name": "PropagateC2Ip",
         "description": "Propagates malware from URLs to hostnames",
     }
 
     ACTS_ON = 'Hostname'  # act on Urls only
 
-    CUSTOM_FILTER = Q(tags__name="phishing")  # filter only tagged elements
+    CUSTOM_FILTER = Q(tags__name="c2")  # filter only tagged elements
 
     EXPIRATION = None
 
@@ -30,7 +30,7 @@ class PropagatePhishingIp(ScheduledAnalytics):
         for link in n:
             # logging.debug(link)
             # logging.debug('after iteration')
-            link[1].tag('phishing')
+            link[1].tag('c2')
         # if n:
         #     for link in n[0]:
         #         link[1].tag('phishing')
