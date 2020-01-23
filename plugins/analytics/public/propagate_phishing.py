@@ -4,6 +4,7 @@ from datetime import timedelta
 from plugins.analytics.public.process_url import ProcessUrl
 from core.analytics import ScheduledAnalytics
 from mongoengine import Q
+import logging
 
 
 class PropagatePhishing(ScheduledAnalytics):
@@ -22,6 +23,8 @@ class PropagatePhishing(ScheduledAnalytics):
 
     @staticmethod
     def each(obj):
+        t = obj.neighbors().values()
+        logging.debug(t)
         n = obj.neighbors(neighbor_type="Hostname").values()
         if n:
             for link in n[0]:
