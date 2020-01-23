@@ -23,7 +23,9 @@ class PropagatePhishing(ScheduledAnalytics):
 
     @staticmethod
     def each(obj):
-        n = obj.neighbors(neighbor_type="Hostname").values()
+        t = obj.neighbors().values()
+        logging.debug(t)
+        n = obj.neighbors(neighbor_type="Ip").values()
         if n:
             for link in n[0]:
                 link[1].tag('phishing')
@@ -31,4 +33,3 @@ class PropagatePhishing(ScheduledAnalytics):
             h = ProcessUrl.each(obj)
             if h is not None:
                 h.tag('phishing')
-        
