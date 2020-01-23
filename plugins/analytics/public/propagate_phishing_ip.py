@@ -25,7 +25,7 @@ class PropagatePhishingIp(ScheduledAnalytics):
     def each(obj):
         # t = obj.neighbors().values()
         # logging.debug(t)
-        n = obj.neighbors(neighbor_type="Ip").values()
+        n = obj.neighbors(neighbor_type="Ip").values()[0]
         logging.debug('there n')
         logging.debug(n)
         logging.debug('there for')
