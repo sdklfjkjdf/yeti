@@ -26,9 +26,12 @@ class PropagatePhishingIp(ScheduledAnalytics):
         # t = obj.neighbors().values()
         # logging.debug(t)
         n = obj.neighbors(neighbor_type="Ip").values()
+        logging.debug('there n')
         logging.debug(n)
+        logging.debug('there for')
         for link in n:
             logging.debug(link)
+            logging.debug('after iteration')
             link[1].tag('phishing')
         # if n:
         #     for link in n[0]:
