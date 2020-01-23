@@ -15,7 +15,7 @@ class PropagatePhishingIp(ScheduledAnalytics):
         "description": "Propagates malware from URLs to hostnames",
     }
 
-    ACTS_ON = 'Url'  # act on Urls only
+    ACTS_ON = 'Hostname'  # act on Urls only
 
     CUSTOM_FILTER = Q(tags__name="phishing")  # filter only tagged elements
 
@@ -26,10 +26,12 @@ class PropagatePhishingIp(ScheduledAnalytics):
         t = obj.neighbors().values()
         logging.debug(t)
         n = obj.neighbors(neighbor_type="Ip").values()
-        if n:
-            for link in n[0]:
-                link[1].tag('phishing')
-        else:
-            h = ProcessUrl.each(obj)
-            if h is not None:
-                h.tag('phishing')
+        for link in n:
+            link[1].tag('phishing')
+        # if n:
+        #     for link in n[0]:
+        #         link[1].tag('phishing')
+        # else:
+        #     h = ProcessUrl.each(obj)
+        #     if h is not None:
+        #         h.tag('phishing')
