@@ -4,7 +4,7 @@ from datetime import timedelta
 from plugins.analytics.public.process_url import ProcessUrl
 from core.analytics import ScheduledAnalytics
 from mongoengine import Q
-
+import logging
 
 class PropagateBlocklist(ScheduledAnalytics):
 
@@ -25,6 +25,8 @@ class PropagateBlocklist(ScheduledAnalytics):
         n = obj.neighbors(neighbor_type="Hostname").values()
         if n:
             for link in n[0]:
+                logging.debug(link)
+                logging.debug(*link)
                 link[1].tag('blocklist')
         else:
             h = ProcessUrl.each(obj)
