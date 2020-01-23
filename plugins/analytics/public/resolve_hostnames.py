@@ -27,9 +27,11 @@ class ResolveHostnames(ScheduledAnalytics):
     EXPIRATION = timedelta(days=3)  # Analysis will expire after 1 day
 
     def bulk(self, hostnames):
-        if 20 < datetime.utcnow().hour or datetime.utcnow().hour < 8:
-            p = ParallelDnsResolver()
-            p.mass_resolve(hostnames)
+        p = ParallelDnsResolver()
+        p.mass_resolve(hostnames)
+        # if 20 < datetime.utcnow().hour or datetime.utcnow().hour < 8:
+        #     p = ParallelDnsResolver()
+        #     p.mass_resolve(hostnames)
 
     @classmethod
     def each(cls, hostname, rtype=None, results=[]):
