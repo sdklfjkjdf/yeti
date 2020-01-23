@@ -24,7 +24,7 @@ class ResolveHostnames(ScheduledAnalytics):
     }
 
     ACTS_ON = 'Hostname'
-    EXPIRATION = timedelta(days=3)  # Analysis will expire after 1 day
+    EXPIRATION = timedelta(hours=2)  # Analysis will expire after 1 day
 
     def bulk(self, hostnames):
         p = ParallelDnsResolver()
@@ -66,7 +66,7 @@ class ParallelDnsResolver(object):
         self.resolver.timeout = 2
         self.resolver.lifetime = 2
 
-    def mass_resolve(self, domains, num_threads=100):
+    def mass_resolve(self, domains, num_threads=10):
         threads = []
         for _ in xrange(num_threads):
             logging.debug("Starting thread {}".format(_))

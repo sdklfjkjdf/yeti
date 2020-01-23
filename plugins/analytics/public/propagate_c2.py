@@ -30,3 +30,11 @@ class PropagateC2(ScheduledAnalytics):
             h = ProcessUrl.each(obj)
             if h is not None:
                 h.tag('c2')
+        n = obj.neighbors(neighbor_type="Ip").values()
+        if n:
+            for link in n[0]:
+                link[1].tag('c2')
+        else:
+            h = ProcessUrl.each(obj)
+            if h is not None:
+                h.tag('c2')

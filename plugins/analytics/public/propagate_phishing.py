@@ -30,3 +30,11 @@ class PropagatePhishing(ScheduledAnalytics):
             h = ProcessUrl.each(obj)
             if h is not None:
                 h.tag('phishing')
+        n = obj.neighbors(neighbor_type="Ip").values()
+        if n:
+            for link in n[0]:
+                link[1].tag('phishing')
+        else:
+            h = ProcessUrl.each(obj)
+            if h is not None:
+                h.tag('phishing')
