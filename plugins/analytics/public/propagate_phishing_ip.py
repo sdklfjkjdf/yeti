@@ -7,11 +7,11 @@ from mongoengine import Q
 import logging
 
 
-class PropagatePhishing(ScheduledAnalytics):
+class PropagatePhishingIp(ScheduledAnalytics):
 
     default_values = {
         "frequency": timedelta(hours=1),
-        "name": "PropagatePhishing",
+        "name": "PropagatePhishingIp",
         "description": "Propagates malware from URLs to hostnames",
     }
 
